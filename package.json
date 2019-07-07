@@ -19,7 +19,9 @@
   "scripts": {
     "lint": "npx eslint \"src/**\"",
     "test": "npx jest",
-    "test:coverage": "npx jest --coverage"
+    "test:coverage": "npx jest --coverage",
+    "build": "npx tsc",
+    "build:typedoc": "npx typedoc --options \"typedoc.json\""
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -36,6 +38,7 @@
     "eslint-config-google": "^0.13.0",
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
+    "typedoc": "^0.14.2",
     "typescript": "^3.5.1"
   }
 }

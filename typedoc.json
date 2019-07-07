@@ -1,0 +1,4 @@
+{
+    "out": "docs",
+    "exclude": "src/**/*+(index.ts|constants.ts|type-assertions.ts)"
+}
