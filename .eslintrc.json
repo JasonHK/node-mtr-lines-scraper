@@ -55,6 +55,7 @@
                 "exceptions": ["-", "="]
             }
         }],
+        "valid-jsdoc": "off",
         "@typescript-eslint/class-name-casing": "error",
         "@typescript-eslint/explicit-member-accessibility": ["error", {
             "accessibility": "explicit",
