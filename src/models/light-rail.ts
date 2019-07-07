@@ -11,7 +11,7 @@ export class LightRail {
 
     private readonly lines: LightRail.LinesMap = new Map();
     private readonly stations: LightRail.StationsMap = new Map();
-    private readonly zones: LightRail.ZoneMap = new Map();
+    private readonly zones: LightRail.ZonesMap = new Map();
 
     constructor(lines: LightRail.LinesRecord, stations: LightRail.StationsRecord, zones: LightRail.ZonesRecord) {
 
@@ -213,6 +213,6 @@ export namespace LightRail {
     export type StationsMap = Map<string, Station>;
     export type StationsRecord = Record<string, Station>;
 
-    export type ZoneMap = Map<string, Zone>;
+    export type ZonesMap = Map<string, Zone>;
     export type ZonesRecord = Record<string, Zone>;
 }
