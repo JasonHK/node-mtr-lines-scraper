@@ -11,6 +11,10 @@ import { isObject } from "../utilities/type-assertions";
 
 import { getTripPlanner } from "./loader";
 
+/**
+ * Retrieve the railway details from the provider, or parse from an existing railway object or trip planner.
+ * @param object An existing object to be parsed, optional
+ */
 export async function getRailwayDetails(object?: RailwayObject | TripPlanner): Promise<RailwayDetails> {
 
     if (isObject(object)) { return getRailwayDetailsSync(object); }
@@ -19,6 +23,10 @@ export async function getRailwayDetails(object?: RailwayObject | TripPlanner): P
     return getRailwayDetailsSync(planner);
 }
 
+/**
+ * Retrieve the railway details from an existing railway object or trip planner.
+ * @param object An existing object to be parsed
+ */
 export function getRailwayDetailsSync(object: RailwayObject | TripPlanner): RailwayDetails {
 
     return {

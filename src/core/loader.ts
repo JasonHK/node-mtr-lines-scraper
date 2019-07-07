@@ -13,6 +13,9 @@ interface ScriptContext extends Context {
     lightRailDetails: TripPlanner.LightRail;
 }
 
+/**
+ * Retrieve the trip planner from the provider.
+ */
 export async function getTripPlanner(): Promise<TripPlanner> {
 
     const response: AxiosResponse<string> = await Axios.post(REMOTE_ENDPOINT, undefined, {

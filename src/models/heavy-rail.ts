@@ -7,6 +7,9 @@ import { TripPlanner } from "../interfaces/trip-planner";
 
 import { isObject } from "../utilities/type-assertions";
 
+/**
+ * Details of the heavy rail system of MTR. It contains every lines and stations in the railway system.
+ */
 export class HeavyRail {
 
     private readonly lines: HeavyRail.LinesMap = new Map();
@@ -50,16 +53,28 @@ export class HeavyRail {
         });
     }
 
+    /**
+     * Retrieve a rail line of the railway system using the code of the line.
+     * @param code The code of the rail line
+     */
     public getLineByCode(code: string): HeavyRail.Line {
 
         return this.lineCodes.has(code) ? this.getLineById(this.lineCodes.get(code)) : undefined;
     }
 
+    /**
+     * Retrieve a rail line of the railway system using the ID of the line.
+     * @param id The ID of the rail line
+     */
     public getLineById(id: string): HeavyRail.Line {
 
         return this.lines.get(id);
     }
 
+    /**
+     * Retrieve a list of rail lines that the given station is one of theirs.
+     * @param station The targeted station
+     */
     public getLinesByStation(station: HeavyRail.Station): HeavyRail.Line[] {
 
         if (!station) { return []; }
@@ -72,26 +87,46 @@ export class HeavyRail {
         return lines;
     }
 
+    /**
+     * Retrieve a list of rail lines that the station with the given code is one of theirs.
+     * @param stationCode The code of the targeted station
+     */
     public getLinesByStationCode(stationCode: string): HeavyRail.Line[] {
 
         return this.getLinesByStation(this.getStationByCode(stationCode));
     }
 
+    /**
+     * Retrieve a list of rail lines that the station with the given ID is one of theirs.
+     * @param stationId The ID of the targeted station
+     */
     public getLinesByStationId(stationId: string): HeavyRail.Line[] {
 
         return this.getLinesByStation(this.getStationById(stationId));
     }
 
+    /**
+     * Retrieve a rail station of the railway system using the code of the station.
+     * @param code The code of the rail line
+     */
     public getStationByCode(code: string): HeavyRail.Station {
 
         return this.stationCodes.has(code) ? this.getStationById(this.stationCodes.get(code)) : undefined;
     }
 
+    /**
+     * Retrieve a rail station of the railway system using the ID of the station.
+     * @param id The ID of the rail line
+     */
     public getStationById(id: string): HeavyRail.Station {
 
         return this.stations.get(id);
     }
 
+    /**
+     * Retrieve a list of rail stations of the given line.
+     * @param line The targeted line
+     */
     public getStationsByLine(line: HeavyRail.Line): HeavyRail.Station[] {
 
         if (!line) { return []; }
@@ -104,11 +139,19 @@ export class HeavyRail {
         return stations;
     }
 
+    /**
+     * Retrieve a list of rail stations of the line with the given code.
+     * @param lineCode The code of the targeted line
+     */
     public getStationsByLineCode(lineCode: string): HeavyRail.Station[] {
 
         return this.getStationsByLine(this.getLineByCode(lineCode));
     }
 
+    /**
+     * Retrieve a list of rail stations of the line with the given ID.
+     * @param lineId The ID of the targeted line
+     */
     public getStationsByLineId(lineId: string): HeavyRail.Station[] {
 
         return this.getStationsByLine(this.getLineById(lineId));
