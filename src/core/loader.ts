@@ -2,9 +2,10 @@
 
 import Axios, { AxiosResponse } from "axios";
 import { load as loadHTML } from "cheerio";
+import { isFullString } from "is-what";
 import { Context, Script } from "vm";
 
-import { REMOTE_ENDPOINT } from "../constants";
+import { REMOTE_ENDPOINT, REQUEST_HEADERS, SCRIPT_REGEXP } from "../constants";
 
 import { TripPlanner } from "../interfaces/trip-planner";
 
@@ -20,9 +21,7 @@ export async function getTripPlanner(): Promise<TripPlanner> {
 
     const response: AxiosResponse<string> = await Axios.post(REMOTE_ENDPOINT, undefined, {
         responseType: "text",
-        headers: {
-            "Referer": "http://www.mtr.com.hk/ch/customer/main/index.html",
-        },
+        headers: REQUEST_HEADERS,
     });
 
     let source = "";
@@ -30,7 +29,7 @@ export async function getTripPlanner(): Promise<TripPlanner> {
     const document: CheerioStatic = loadHTML(response.data);
     document("script").each((index, element): void => {
         element.childNodes.forEach((child): void => {
-            if (child.data && /(?:heavyRailDetails|lightRailDetails)/.test(child.data)) {
+            if (isFullString(child.data) && SCRIPT_REGEXP.test(child.data)) {
                 source += `${ child.data }\n`;
             }
         });
