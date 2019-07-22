@@ -14,7 +14,7 @@ describe("Parser", (): void => {
 
     mocked(getTripPlanner).mockResolvedValue(SAMPLE_TRIP_PLANNER);
 
-    describe("getRailwayDetails", (): void => {
+    describe("getRailwayDetails()", (): void => {
 
         it("should return railway details", (done): void => {
 
@@ -25,7 +25,7 @@ describe("Parser", (): void => {
         });
     });
 
-    describe("getRailwayDetailsSync", (): void => {
+    describe("getRailwayDetailsSync()", (): void => {
 
         it("should return railway details", (done): void => {
 

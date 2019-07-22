@@ -7,7 +7,7 @@ import { getTripPlanner } from "./loader";
 
 describe("Loader", (): void => {
 
-    describe("getTripPlanner", (): void => {
+    describe("getTripPlanner()", (): void => {
 
         it("should return trip planner", (done): void => {
 

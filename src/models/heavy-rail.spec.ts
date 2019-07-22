@@ -7,7 +7,7 @@ import { HeavyRail } from "./heavy-rail";
 
 describe("HeavyRail", (): void => {
 
-    describe("constructor", (): void => {
+    describe("constructor()", (): void => {
 
         it("should return an new instance", (done): void => {
 
@@ -18,7 +18,7 @@ describe("HeavyRail", (): void => {
         });
     });
 
-    describe("parse", (): void => {
+    describe("parse()", (): void => {
 
         it("should return an new instance", (done): void => {
 
@@ -33,7 +33,7 @@ describe("HeavyRail", (): void => {
 
         const heavyRail: HeavyRail = HeavyRail.parse(SAMPLE_RAILWAY_OBJECT.heavyRail);
 
-        describe("getLineByCode", (): void => {
+        describe("getLineByCode()", (): void => {
 
             it("should return a heavy rail line", (done): void => {
 
@@ -46,7 +46,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getLineById", (): void => {
+        describe("getLineById()", (): void => {
 
             it("should return a heavy rail line", (done): void => {
 
@@ -59,7 +59,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getLinesByStation", (): void => {
+        describe("getLinesByStation()", (): void => {
 
             it("should return a list of heavy rail lines", (done): void => {
 
@@ -78,7 +78,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getLinesByStationCode", (): void => {
+        describe("getLinesByStationCode()", (): void => {
 
             it("should return a list of heavy rail lines", (done): void => {
 
@@ -97,7 +97,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getLinesByStationId", (): void => {
+        describe("getLinesByStationId()", (): void => {
 
             it("should return a list of heavy rail lines", (done): void => {
 
@@ -116,7 +116,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getStationByCode", (): void => {
+        describe("getStationByCode()", (): void => {
 
             it("should return a heavy rail station", (done): void => {
 
@@ -129,7 +129,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getStationById", (): void => {
+        describe("getStationById()", (): void => {
 
             it("should return a heavy rail station", (done): void => {
 
@@ -142,7 +142,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getStationsByLine", (): void => {
+        describe("getStationsByLine()", (): void => {
 
             it("should return a list of heavy rail stations", (done): void => {
 
@@ -161,7 +161,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getStationsByLineCode", (): void => {
+        describe("getStationsByLineCode()", (): void => {
 
             it("should return a list of heavy rail stations", (done): void => {
 
@@ -180,7 +180,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("getStationsByLineId", (): void => {
+        describe("getStationsByLineId()", (): void => {
 
             it("should return a list of heavy rail stations", (done): void => {
 
@@ -204,7 +204,7 @@ describe("HeavyRail", (): void => {
 
         const heavyRail: HeavyRail = HeavyRail.parse(SAMPLE_RAILWAY_OBJECT.heavyRail);
 
-        describe("toJSON", (): void => {
+        describe("toJSON()", (): void => {
 
             it("should return an object", (done): void => {
 
@@ -213,7 +213,7 @@ describe("HeavyRail", (): void => {
             });
         });
 
-        describe("toString", (): void => {
+        describe("toString()", (): void => {
 
             it("should return an object", (done): void => {
 

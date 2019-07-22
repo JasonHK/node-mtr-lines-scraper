@@ -3,8 +3,6 @@
 
 import { RailwayObject } from "./railway-object";
 
-// export const VALID_RAILWAY_OBJECT: RailwayObject = {};
-
 export const SAMPLE_RAILWAY_OBJECT: RailwayObject = {
     heavyRail: {
         lines: {

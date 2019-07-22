@@ -7,7 +7,7 @@ import { LightRail } from "./light-rail";
 
 describe("LightRail", (): void => {
 
-    describe("constructor", (): void => {
+    describe("constructor()", (): void => {
 
         it("should return an new instance", (done): void => {
 
@@ -19,7 +19,7 @@ describe("LightRail", (): void => {
         });
     });
 
-    describe("parse", (): void => {
+    describe("parse()", (): void => {
 
         it("should return an new instance", (done): void => {
 
@@ -34,7 +34,7 @@ describe("LightRail", (): void => {
 
         const lightRail: LightRail = LightRail.parse(SAMPLE_RAILWAY_OBJECT.lightRail);
 
-        describe("getLineById", (): void => {
+        describe("getLineById()", (): void => {
 
             it("should return a light rail line", (done): void => {
 
@@ -47,7 +47,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getLinesByStation", (): void => {
+        describe("getLinesByStation()", (): void => {
 
             it("should return a list of light rail lines", (done): void => {
 
@@ -66,7 +66,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getLinesByStationId", (): void => {
+        describe("getLinesByStationId()", (): void => {
 
             it("should return a list of light rail lines", (done): void => {
 
@@ -85,7 +85,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getStationById", (): void => {
+        describe("getStationById()", (): void => {
 
             it("should return a light rail station", (done): void => {
 
@@ -98,7 +98,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getStationsByLine", (): void => {
+        describe("getStationsByLine()", (): void => {
 
             it("should return a list of light rail stations", (done): void => {
 
@@ -117,7 +117,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getStationsByLineId", (): void => {
+        describe("getStationsByLineId()", (): void => {
 
             it("should return a list of light rail stations", (done): void => {
 
@@ -136,7 +136,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getStationsByZone", (): void => {
+        describe("getStationsByZone()", (): void => {
 
             it("should return a list of light rail stations", (done): void => {
 
@@ -155,7 +155,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getStationsByZoneId", (): void => {
+        describe("getStationsByZoneId()", (): void => {
 
             it("should return a list of light rail stations", (done): void => {
 
@@ -174,7 +174,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getZoneById", (): void => {
+        describe("getZoneById()", (): void => {
 
             it("should return a light rail zone", (done): void => {
 
@@ -187,7 +187,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getZoneByStation", (): void => {
+        describe("getZoneByStation()", (): void => {
 
             it("should return a light rail zone", (done): void => {
 
@@ -202,7 +202,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("getZoneByStationId", (): void => {
+        describe("getZoneByStationId()", (): void => {
 
             it("should return a light rail zone", (done): void => {
 
@@ -222,7 +222,7 @@ describe("LightRail", (): void => {
 
         const lightRail: LightRail = LightRail.parse(SAMPLE_RAILWAY_OBJECT.lightRail);
 
-        describe("toJSON", (): void => {
+        describe("toJSON()", (): void => {
 
             it("should return an object", (done): void => {
 
@@ -231,7 +231,7 @@ describe("LightRail", (): void => {
             });
         });
 
-        describe("toString", (): void => {
+        describe("toString()", (): void => {
 
             it("should return an object", (done): void => {
 

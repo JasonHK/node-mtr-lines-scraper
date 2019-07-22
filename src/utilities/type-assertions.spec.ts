@@ -1,103 +1,160 @@
 "use strict";
 
-import { isNull, isNullOrUndefined, isObject, isUndefined } from "./type-assertions";
+import { SAMPLE_RAILWAY_OBJECT } from "../interfaces/railway-object.spec";
+import { SAMPLE_TRIP_PLANNER } from "../interfaces/trip-planner.spec";
 
-describe("TypeAssertions", (): void => {
+import { 
+    isHeavyRailObject, isHeavyRailTripPlanner,
+    isLightRailObject, isLightRailTripPlanner,
+    isRailwayObject, isTripPlanner,
+} from "./type-assertions";
 
-    const ARRAY: unknown[] = [];
-    const NULL = null;
-    const OBJECT = {};
-    const UNDEFINED = undefined;
+describe("isHeavyRailObject()", (): void => {
 
-    describe("isNull", (): void => {
+    const assertion = isHeavyRailObject;
 
-        const assertion = isNull;
+    it("should be true", (done): void => {
 
-        it("should be true", (done): void => {
+        const RETURN = true;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.heavyRail)).toBe(RETURN);
 
-            const RETURN = true;
-            expect(assertion(NULL)).toBe(RETURN);
-
-            done();
-        });
-
-        it("should be false", (done): void => {
-
-            const RETURN = false;
-            expect(assertion(ARRAY)).toBe(RETURN);
-            expect(assertion(OBJECT)).toBe(RETURN);
-            expect(assertion(UNDEFINED)).toBe(RETURN);
-
-            done();
-        });
+        done();
     });
 
-    describe("isNullOrUndefined", (): void => {
+    it("should be false", (done): void => {
 
-        const assertion = isNullOrUndefined;
+        const RETURN = false;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.lightRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.lightRail)).toBe(RETURN);
 
-        it("should be true", (done): void => {
+        done();
+    });
+});
 
-            const RETURN = true;
-            expect(assertion(NULL)).toBe(RETURN);
-            expect(assertion(undefined)).toBe(RETURN);
+describe("isHeavyRailTripPlanner()", (): void => {
 
-            done();
-        });
+    const assertion = isHeavyRailTripPlanner;
 
-        it("should be false", (done): void => {
+    it("should be true", (done): void => {
 
-            const RETURN = false;
-            expect(assertion(ARRAY)).toBe(RETURN);
-            expect(assertion(OBJECT)).toBe(RETURN);
+        const RETURN = true;
+        expect(assertion(SAMPLE_TRIP_PLANNER.heavyRail)).toBe(RETURN);
 
-            done();
-        });
+        done();
     });
 
-    describe("isObject", (): void => {
+    it("should be false", (done): void => {
 
-        const assertion = isObject;
+        const RETURN = false;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.lightRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.lightRail)).toBe(RETURN);
 
-        it("should be true", (done): void => {
+        done();
+    });
+});
 
-            const RETURN = true;
-            expect(assertion(ARRAY)).toBe(RETURN);
-            expect(assertion(OBJECT)).toBe(RETURN);
+describe("isLightRailObject()", (): void => {
 
-            done();
-        });
+    const assertion = isLightRailObject;
 
-        it("should be false", (done): void => {
+    it("should be true", (done): void => {
 
-            const RETURN = false;
-            expect(assertion(NULL)).toBe(RETURN);
-            expect(assertion(UNDEFINED)).toBe(RETURN);
+        const RETURN = true;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.lightRail)).toBe(RETURN);
 
-            done();
-        });
+        done();
     });
 
-    describe("isUndefined", (): void => {
+    it("should be false", (done): void => {
 
-        const assertion = isUndefined;
+        const RETURN = false;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.lightRail)).toBe(RETURN);
 
-        it("should be true", (done): void => {
+        done();
+    });
+});
 
-            const RETURN = true;
-            expect(assertion(UNDEFINED)).toBe(RETURN);
+describe("isLightRailTripPlanner()", (): void => {
 
-            done();
-        });
+    const assertion = isLightRailTripPlanner;
 
-        it("should be false", (done): void => {
+    it("should be true", (done): void => {
 
-            const RETURN = false;
-            expect(assertion(ARRAY)).toBe(RETURN);
-            expect(assertion(NULL)).toBe(RETURN);
-            expect(assertion(OBJECT)).toBe(RETURN);
+        const RETURN = true;
+        expect(assertion(SAMPLE_TRIP_PLANNER.lightRail)).toBe(RETURN);
 
-            done();
-        });
+        done();
+    });
+
+    it("should be false", (done): void => {
+
+        const RETURN = false;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.lightRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.heavyRail)).toBe(RETURN);
+
+        done();
+    });
+});
+
+describe("isRailwayObject()", (): void => {
+
+    const assertion = isRailwayObject;
+
+    it("should be true", (done): void => {
+
+        const RETURN = true;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT)).toBe(RETURN);
+
+        done();
+    });
+
+    it("should be false", (done): void => {
+
+        const RETURN = false;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.lightRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.lightRail)).toBe(RETURN);
+
+        done();
+    });
+});
+
+describe("isTripPlanner()", (): void => {
+
+    const assertion = isTripPlanner;
+
+    it("should be true", (done): void => {
+
+        const RETURN = true;
+        expect(assertion(SAMPLE_TRIP_PLANNER)).toBe(RETURN);
+
+        done();
+    });
+
+    it("should be false", (done): void => {
+
+        const RETURN = false;
+        expect(assertion(SAMPLE_RAILWAY_OBJECT)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_RAILWAY_OBJECT.lightRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.heavyRail)).toBe(RETURN);
+        expect(assertion(SAMPLE_TRIP_PLANNER.lightRail)).toBe(RETURN);
+
+        done();
     });
 });
