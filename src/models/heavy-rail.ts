@@ -1,11 +1,12 @@
 "use strict";
 
+import { isFullString } from "is-what";
 import MapToObj from "map-to-obj";
 
 import { LocalizedObject } from "../interfaces/localized-object";
 import { TripPlanner } from "../interfaces/trip-planner";
 
-import { isObject } from "../utilities/type-assertions";
+import { isHeavyRailObject } from "../utilities/type-assertions";
 
 /**
  * Details of the heavy rail system of MTR. It contains every lines and stations in the railway system.
@@ -81,7 +82,7 @@ export class HeavyRail {
 
         const lines: HeavyRail.Line[] = [];
         station.lineIDs.forEach((id): void => {
-            if (id && this.lines.has(id)) { lines.push(this.getLineById(id)); }
+            if (isFullString(id) && this.lines.has(id)) { lines.push(this.getLineById(id)); }
         });
 
         return lines;
@@ -107,7 +108,7 @@ export class HeavyRail {
 
     /**
      * Retrieve a rail station of the railway system using the code of the station.
-     * @param code The code of the rail line
+     * @param code The code of the rail station
      */
     public getStationByCode(code: string): HeavyRail.Station {
 
@@ -116,7 +117,7 @@ export class HeavyRail {
 
     /**
      * Retrieve a rail station of the railway system using the ID of the station.
-     * @param id The ID of the rail line
+     * @param id The ID of the rail station
      */
     public getStationById(id: string): HeavyRail.Station {
 
@@ -133,7 +134,7 @@ export class HeavyRail {
 
         const stations: HeavyRail.Station[] = [];
         line.stationIDs.forEach((id): void => {
-            if (id && this.stations.has(id)) { stations.push(this.getStationById(id)); }
+            if (isFullString(id) && this.stations.has(id)) { stations.push(this.getStationById(id)); }
         });
 
         return stations;
@@ -170,14 +171,9 @@ export class HeavyRail {
         return JSON.stringify(this);
     }
 
-    private static isHeavyRailObject(object: HeavyRail.Object | TripPlanner.HeavyRail): object is HeavyRail.Object {
-
-        return isObject(object) && !(Array.isArray(object.lines) || Array.isArray(object.stations));
-    }
-
     public static parse(object: HeavyRail.Object | TripPlanner.HeavyRail): HeavyRail {
 
-        if (this.isHeavyRailObject(object)) { return new HeavyRail(object.lines, object.stations); }
+        if (isHeavyRailObject(object)) { return new HeavyRail(object.lines, object.stations); }
 
         const lines: HeavyRail.LinesRecord = {};
         const stations: HeavyRail.StationsRecord = {};

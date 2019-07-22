@@ -1,12 +1,16 @@
 "use strict";
 
+import { isFullString } from "is-what";
 import MapToObj from "map-to-obj";
 
 import { LocalizedObject } from "../interfaces/localized-object";
 import { TripPlanner } from "../interfaces/trip-planner";
 
-import { isObject } from "../utilities/type-assertions";
+import { isLightRailObject } from "../utilities/type-assertions";
 
+/**
+ * Details of the light rail system of MTR. It contains every lines and stations in the railway system.
+ */
 export class LightRail {
 
     private readonly lines: LightRail.LinesMap = new Map();
@@ -28,77 +32,121 @@ export class LightRail {
         });
     }
 
+    /**
+     * Retrieve a rail line of the railway system using the ID of the line.
+     * @param id The ID of the rail line
+     */
     public getLineById(id: string): LightRail.Line {
 
         return this.lines.get(id);
     }
 
+    /**
+     * Retrieve a list of rail lines that the given station is one of theirs.
+     * @param station The targeted station
+     */
     public getLinesByStation(station: LightRail.Station): LightRail.Line[] {
 
         if (!station) { return []; }
 
         const lines: LightRail.Line[] = [];
         station.lineIDs.forEach((id): void => {
-            if (id && this.lines.has(id)) { lines.push(this.getLineById(id)); }
+            if (isFullString(id) && this.lines.has(id)) { lines.push(this.getLineById(id)); }
         });
 
         return lines;
     }
 
+    /**
+     * Retrieve a list of rail lines that the station with the given ID is one of theirs.
+     * @param stationId The ID of the targeted station
+     */
     public getLinesByStationId(stationId: string): LightRail.Line[] {
 
         return this.getLinesByStation(this.getStationById(stationId));
     }
 
+    /**
+     * Retrieve a rail station of the railway system using the ID of the station.
+     * @param id The ID of the rail station
+     */
     public getStationById(id: string): LightRail.Station {
 
         return this.stations.get(id);
     }
 
+    /**
+     * Retrieve a list of rail stations of the given line.
+     * @param line The targeted line
+     */
     public getStationsByLine(line: LightRail.Line): LightRail.Station[] {
 
         if (!line) { return []; }
 
         const stations: LightRail.Station[] = [];
         line.stationIDs.forEach((id): void => {
-            if (id && this.stations.has(id)) { stations.push(this.getStationById(id)); }
+            if (isFullString(id) && this.stations.has(id)) { stations.push(this.getStationById(id)); }
         });
 
         return stations;
     }
 
+    /**
+     * Retrieve a list of rail stations of the line with the given ID.
+     * @param lineId The ID of the targeted line
+     */
     public getStationsByLineId(lineId: string): LightRail.Station[] {
 
         return this.getStationsByLine(this.getLineById(lineId));
     }
 
+    /**
+     * Retrieve a list of rail stations of the given zone.
+     * @param zone The targeted zone
+     */
     public getStationsByZone(zone: LightRail.Zone): LightRail.Station[] {
 
         if (!zone) { return []; }
 
         const stations: LightRail.Station[] = [];
         zone.stationIDs.forEach((id): void => {
-            if (id && this.stations.has(id)) { stations.push(this.getStationById(id)); }
+            if (isFullString(id) && this.stations.has(id)) { stations.push(this.getStationById(id)); }
         });
 
         return stations;
     }
 
+    /**
+     * Retrieve a list of rail stations of the zone with the given ID.
+     * @param zoneId The ID of the targeted zone
+     */
     public getStationsByZoneId(zoneId: string): LightRail.Station[] {
 
         return this.getStationsByZone(this.getZoneById(zoneId));
     }
 
+    /**
+     * Retrieve a rail zone of the railway system using the ID of the zone.
+     * @param id The ID of the rail zone
+     */
     public getZoneById(id: string): LightRail.Zone {
 
         return this.zones.get(id);
     }
 
+    /**
+     * Retrieve the rail zone of the given station.
+     * @param station The targeted station
+     */
     public getZoneByStation(station: LightRail.Station): LightRail.Zone {
 
         return this.getZoneById(station.zoneID);
     }
 
+    /**
+     * Retrieve the rail zone of the given station with the given ID.
+     * @param stationId The ID of the targeted line
+     */
     public getZoneByStationId(stationId: string): LightRail.Zone {
 
         return this.getZoneByStation(this.getStationById(stationId));
@@ -118,15 +166,9 @@ export class LightRail {
         return JSON.stringify(this);
     }
 
-    private static isLightRailObject(object: LightRail.Object | TripPlanner.LightRail): object is LightRail.Object {
-
-        // eslint-disable-next-line max-len
-        return isObject(object) && !(Array.isArray(object.lines) || Array.isArray(object.stations) || Array.isArray(object.zones));
-    }
-
     public static parse(object: LightRail.Object | TripPlanner.LightRail): LightRail {
 
-        if (this.isLightRailObject(object)) { return new LightRail(object.lines, object.stations, object.zones); }
+        if (isLightRailObject(object)) { return new LightRail(object.lines, object.stations, object.zones); }
 
         const lines: LightRail.LinesRecord = {};
         const stations: LightRail.StationsRecord = {};
