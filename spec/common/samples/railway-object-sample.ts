@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 "use strict";
 
-import { RailwayObject } from "./railway-object";
+import { RailwayObject } from "../../../src/interfaces/railway-object";
 
-export const SAMPLE_RAILWAY_OBJECT: RailwayObject = {
+export const RailwayObjectSample: RailwayObject = {
     heavyRail: {
         lines: {
             "12": {
