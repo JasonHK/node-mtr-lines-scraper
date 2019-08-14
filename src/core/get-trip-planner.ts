@@ -10,8 +10,8 @@ import { REMOTE_ENDPOINT, REQUEST_HEADERS, SCRIPT_REGEXP } from "../constants";
 import { TripPlanner } from "../interfaces/trip-planner";
 
 interface ScriptContext extends Context {
-    heavyRailDetails: TripPlanner.HeavyRail;
-    lightRailDetails: TripPlanner.LightRail;
+    heavyRailDetails?: TripPlanner.HeavyRail;
+    lightRailDetails?: TripPlanner.LightRail;
 }
 
 /**
@@ -48,3 +48,5 @@ export async function getTripPlanner(): Promise<TripPlanner> {
         lightRail: sandbox.lightRailDetails,
     };
 }
+
+export default getTripPlanner;
