@@ -7,9 +7,11 @@ import { LocalizedObject } from "../interfaces/localized-object";
 import { TripPlanner } from "../interfaces/trip-planner";
 
 import { isHeavyRailObject } from "../utilities/type-assertions";
+import { createLineNotFoundError, createStationNotFoundError } from "../utilities/create-errors";
 
 /**
- * Details of the heavy rail system of MTR. It contains every lines and stations in the railway system.
+ * Details of the heavy rail system of MTR. It contains every lines and 
+ * stations in the railway system.
  */
 export class HeavyRail {
 
@@ -32,48 +34,54 @@ export class HeavyRail {
         });
 
         this.lines.forEach((line): void => {
-            if (line.stationCodes.length !== line.stationIDs.length) {
-                line.stationCodes = [];
-                line.stationIDs.forEach((id): void => {
-                    if (this.stations.has(id)) {
-                        line.stationCodes.push(this.stations.get(id).code);
-                    } else { throw new Error(`Missing station with an ID number of ${ id }.`); }
-                });
-            }
+            line.stationCodes = [];
+            line.stationIDs.forEach((id): void => {
+                if (this.stations.has(id)) {
+                    line.stationCodes.push(this.stations.get(id).code);
+                } else { throw createStationNotFoundError(id); }
+            });
         });
 
         this.stations.forEach((station): void => {
-            if (station.lineCodes.length !== station.lineIDs.length) {
-                station.lineCodes = [];
-                station.lineIDs.forEach((id): void => {
-                    if (this.lines.has(id)) {
-                        station.lineCodes.push(this.lines.get(id).code);
-                    } else { throw new Error(`Missing line with an ID number of ${ id }.`); }
-                });
-            }
+            station.lineCodes = [];
+            station.lineIDs.forEach((id): void => {
+                if (this.lines.has(id)) {
+                    station.lineCodes.push(this.lines.get(id).code);
+                } else { throw createLineNotFoundError(id); }
+            });
         });
     }
 
     /**
+     * Retrieve the default string description of the heavy rail object.
+     * 
+     * @hidden
+     */
+    public get [Symbol.toStringTag](): string { return "HeavyRail"; }
+
+    /**
      * Retrieve a rail line of the railway system using the code of the line.
+     * 
      * @param code The code of the rail line
      */
     public getLineByCode(code: string): HeavyRail.Line {
 
-        return this.lineCodes.has(code) ? this.getLineById(this.lineCodes.get(code)) : undefined;
+        return this.lineCodes.has(code) ? this.getLineById(this.lineCodes.get(code)) : null;
     }
 
     /**
      * Retrieve a rail line of the railway system using the ID of the line.
+     * 
      * @param id The ID of the rail line
      */
     public getLineById(id: string): HeavyRail.Line {
 
-        return this.lines.get(id);
+        return this.lines.has(id) ? this.lines.get(id) : null;
     }
 
     /**
      * Retrieve a list of rail lines that the given station is one of theirs.
+     * 
      * @param station The targeted station
      */
     public getLinesByStation(station: HeavyRail.Station): HeavyRail.Line[] {
@@ -89,7 +97,9 @@ export class HeavyRail {
     }
 
     /**
-     * Retrieve a list of rail lines that the station with the given code is one of theirs.
+     * Retrieve a list of rail lines that the station with the given code is one of 
+     * theirs.
+     * 
      * @param stationCode The code of the targeted station
      */
     public getLinesByStationCode(stationCode: string): HeavyRail.Line[] {
@@ -98,7 +108,9 @@ export class HeavyRail {
     }
 
     /**
-     * Retrieve a list of rail lines that the station with the given ID is one of theirs.
+     * Retrieve a list of rail lines that the station with the given ID is one of 
+     * theirs.
+     * 
      * @param stationId The ID of the targeted station
      */
     public getLinesByStationId(stationId: string): HeavyRail.Line[] {
@@ -108,24 +120,27 @@ export class HeavyRail {
 
     /**
      * Retrieve a rail station of the railway system using the code of the station.
+     * 
      * @param code The code of the rail station
      */
     public getStationByCode(code: string): HeavyRail.Station {
 
-        return this.stationCodes.has(code) ? this.getStationById(this.stationCodes.get(code)) : undefined;
+        return this.stationCodes.has(code) ? this.getStationById(this.stationCodes.get(code)) : null;
     }
 
     /**
      * Retrieve a rail station of the railway system using the ID of the station.
+     * 
      * @param id The ID of the rail station
      */
     public getStationById(id: string): HeavyRail.Station {
 
-        return this.stations.get(id);
+        return this.stations.has(id) ? this.stations.get(id) : null;
     }
 
     /**
      * Retrieve a list of rail stations of the given line.
+     * 
      * @param line The targeted line
      */
     public getStationsByLine(line: HeavyRail.Line): HeavyRail.Station[] {
@@ -142,6 +157,7 @@ export class HeavyRail {
 
     /**
      * Retrieve a list of rail stations of the line with the given code.
+     * 
      * @param lineCode The code of the targeted line
      */
     public getStationsByLineCode(lineCode: string): HeavyRail.Station[] {
@@ -151,6 +167,7 @@ export class HeavyRail {
 
     /**
      * Retrieve a list of rail stations of the line with the given ID.
+     * 
      * @param lineId The ID of the targeted line
      */
     public getStationsByLineId(lineId: string): HeavyRail.Station[] {
@@ -245,3 +262,5 @@ export namespace HeavyRail {
     export type StationsMap = Map<string, Station>;
     export type StationsRecord = Record<string, Station>;
 }
+
+export default HeavyRail;
