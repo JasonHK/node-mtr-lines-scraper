@@ -4,8 +4,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "baseUrl": ".",
-        "rootDir": "src",
-        "outDir": "lib",
+        "rootDir": ".",
         "paths": {
             "*": [
                 "*",
@@ -30,6 +29,7 @@
     ],
     "include": [
         "src/**/*",
+        "spec/**/*"
     ],
     "exclude": [
         "src/**/*.spec.ts",

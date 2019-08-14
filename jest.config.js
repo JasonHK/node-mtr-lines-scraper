@@ -3,9 +3,15 @@
 module.exports = {
     preset: "ts-jest",
     testEnvironment: "node",
-    rootDir: "src",
+    rootDir: ".",
     testPathIgnorePatterns: [
         "/node_modules/",
-        "/src/interfaces/",
     ],
+    coverageDirectory: "coverage",
+    collectCoverageFrom: [
+        "src/**/*.ts",
+        "!src/index.ts",
+        "!src/types/**/*",
+    ],
+    coverageReporters: ["html", "json", "lcov", "text"],
 };
