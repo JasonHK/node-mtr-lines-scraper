@@ -1,6 +1,6 @@
 {
   "name": "mtr-lines-scraper",
-  "description": "",
+  "description": "Retrieve heavy rail and light rail lines and stations from the MTR company easily!",
   "license": "GPL-3.0",
   "version": "0.1.0",
   "author": "Jason Kwok",
