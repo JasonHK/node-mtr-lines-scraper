@@ -20,7 +20,7 @@
     "lint": "npx eslint \"src/**\"",
     "test": "npx jest",
     "test:coverage": "npx jest --coverage",
-    "build": "npx tsc",
+    "build": "npx tsc --project tsconfig.build.json",
     "build:typedoc": "npx typedoc --options \"typedoc.json\""
   },
   "dependencies": {
