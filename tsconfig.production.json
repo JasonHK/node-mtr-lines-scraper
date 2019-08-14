@@ -4,6 +4,9 @@
         "baseUrl": ".",
         "rootDir": "src",
         "outDir": "lib",
+        "declaration": false,
+        "removeComments": true,
+        "sourceMap": false,
     },
     "exclude": [
         "src/**/*.spec.ts",
